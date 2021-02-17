@@ -1,12 +1,9 @@
 #!/bin/bash
 # https://github.com/CanadaBry/ValheimDocker/blob/master/server.sh
 
-# update server's data
-/home/steam/steamcmd/steamcmd.sh \
-	    +login anonymous \
-	        +force_install_dir /home/steam/valheim/server \
-		    +app_update 896660 \
-		        +exit
+if [ "$UDPATE_SERVER" ]; then
+	sh update.sh
+fi
 
 #Copy 64bit steamclient, since it keeps using 32bit
 cp /home/steam/steamcmd/linux64/steamclient.so /home/steam/valheim/server/
@@ -27,3 +24,6 @@ trap "kill -SIGINT $!;" SIGTERM
 
 #Wait for server to exit
 while wait $!; [ $? != 0 ]; do true; done
+
+
+.steam/steamapps/common/Valheim\ dedicated\ server/valheim_server.x86_64
