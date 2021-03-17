@@ -1,7 +1,6 @@
 #!/bin/bash
-# https://github.com/CanadaBry/ValheimDocker/blob/master/server.sh
 
-if [ "$UDPATE_SERVER" ]; then
+if [ "$UPDATE_SERVER" ]; then
 	sh update.sh
 fi
 
@@ -25,5 +24,4 @@ trap "kill -SIGINT $!;" SIGTERM
 #Wait for server to exit
 while wait $!; [ $? != 0 ]; do true; done
 
-
-.steam/steamapps/common/Valheim\ dedicated\ server/valheim_server.x86_64
+/home/steam/.steam/steamapps/common/Valheim\ dedicated\ server/valheim_server.x86_64

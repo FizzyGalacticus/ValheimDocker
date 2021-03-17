@@ -1,14 +1,16 @@
 FROM cm2network/steamcmd:latest
 
-RUN mkdir -p /home/steam/valheim/{server,data}
+ARG HOME=/home/steam
 
-WORKDIR /home/steam
+RUN mkdir -p ${HOME}/valheim/{server,data}
+RUN mkdir -p ${HOME}/scripts
 
-COPY update.sh .
-COPY server.sh .
+WORKDIR ${HOME}
 
-RUN sh update.sh
+COPY scripts/ ${HOME}/scripts
 
-ENTRYPOINT [ "sh", "server.sh" ]
+RUN sh scripts/update.sh
+
+ENTRYPOINT [ "sh", "scripts/server.sh" ]
 
 EXPOSE 2456-2458/udp
