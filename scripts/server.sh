@@ -1,7 +1,9 @@
 #!/bin/bash
 
+DIR=$(dirname "$0")
+
 if [ "$UPDATE_SERVER" ]; then
-	sh update.sh
+	sh $DIR/update.sh
 fi
 
 #Copy 64bit steamclient, since it keeps using 32bit
@@ -23,5 +25,3 @@ trap "kill -SIGINT $!;" SIGTERM
 
 #Wait for server to exit
 while wait $!; [ $? != 0 ]; do true; done
-
-/home/steam/.steam/steamapps/common/Valheim\ dedicated\ server/valheim_server.x86_64
